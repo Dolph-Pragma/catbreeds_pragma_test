@@ -3,7 +3,7 @@ import 'package:gatitos_app/models/model_gatitos.dart';
 import 'package:gatitos_app/pages/details_page.dart';
 
 class CardsCatsWidget extends StatelessWidget {
-  final ModelGatitos cat;
+  final CatsModel cat;
   const CardsCatsWidget({Key? key, required this.cat}) : super(key: key);
 
   @override
@@ -26,12 +26,15 @@ class CardsCatsWidget extends StatelessWidget {
               ),
               cat.image.url.isEmpty
                   ? const Image(image: AssetImage('assets/logo.png'))
-                  : FadeInImage(
-                      height: 200,
-                      width: double.infinity,
-                      placeholder: const AssetImage('assets/logo.png'),
-                      image: NetworkImage(cat.image.url),
-                      fit: BoxFit.cover,
+                  : Hero(
+                      tag: cat.image.id,
+                      child: FadeInImage(
+                        height: 200,
+                        width: double.infinity,
+                        placeholder: const AssetImage('assets/logo.png'),
+                        image: NetworkImage(cat.image.url),
+                        fit: BoxFit.cover,
+                      ),
                     ),
               ListTile(
                 title: Text(cat.origin),

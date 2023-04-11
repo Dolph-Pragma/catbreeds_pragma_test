@@ -1,9 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:gatitos_app/bloc/cats_bloc.dart';
 import '/pages/home_page.dart';
-import '../services/api_gatitos.dart';
-import '../models/model_gatitos.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -13,21 +12,22 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  GatitosProvider catsProvider = GatitosProvider();
+  final CatBloc _catBloc = CatBloc();
 
   @override
   void initState() {
-    _getCats().then((value) => Timer(
-          const Duration(seconds: 3),
-          () => Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context) => HomePage(cats: value),
-          )),
-        ));
     super.initState();
+    _getCats();
+    Timer(
+      const Duration(seconds: 3),
+      () => Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => const HomePage(),
+      )),
+    );
   }
 
-  Future<List<ModelGatitos>> _getCats() async {
-    return await catsProvider.getCats();
+  Future<void> _getCats() async {
+    await _catBloc.getCats();
   }
 
   @override

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gatitos_app/models/model_gatitos.dart';
 
 class DescriptionWidget extends StatelessWidget {
-  final ModelGatitos cat;
+  final CatsModel cat;
   const DescriptionWidget({Key? key, required this.cat}) : super(key: key);
 
   @override

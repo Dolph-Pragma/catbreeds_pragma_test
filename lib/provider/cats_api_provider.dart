@@ -3,13 +3,16 @@ import 'dart:convert';
 import '../models/model_gatitos.dart';
 import 'package:http/http.dart' as http;
 
-class GatitosProvider {
+class CatsApiProvider {
   final api = 'https://api.thecatapi.com/v1/breeds';
 
-  Future<List<ModelGatitos>> getCats() async {
-    final List<ModelGatitos> cats = [];
+  Future<List<CatsModel>> getCats() async {
+    final List<CatsModel> cats = [];
 
-    var headers = {'x-api-key': 'bda53789-d59e-46cd-9bc4-2936630fde39'};
+    var headers = {
+      'x-api-key':
+          'live_IlRQjj0PEkaPQexhFMlOsmv8vU3llljNUpR8sy3eZ07HRyeJMRcklU6pqABpMkdG'
+    };
     var request = http.Request('GET', Uri.parse(api));
 
     request.headers.addAll(headers);
@@ -20,7 +23,7 @@ class GatitosProvider {
     if (decodedData == null) return [];
 
     decodedData.forEach((cat) {
-      cats.add(ModelGatitos.fromJson(cat));
+      cats.add(CatsModel.fromJson(cat));
     });
 
     if (response.statusCode == 200) {

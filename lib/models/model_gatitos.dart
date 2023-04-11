@@ -4,13 +4,13 @@
 
 import 'dart:convert';
 
-ModelGatitos modelGatitosFromJson(String str) =>
-    ModelGatitos.fromJson(json.decode(str));
+CatsModel modelGatitosFromJson(String str) =>
+    CatsModel.fromJson(json.decode(str));
 
-String modelGatitosToJson(ModelGatitos data) => json.encode(data.toJson());
+String modelGatitosToJson(CatsModel data) => json.encode(data.toJson());
 
-class ModelGatitos {
-  ModelGatitos({
+class CatsModel {
+  CatsModel({
     required this.weight,
     required this.id,
     required this.name,
@@ -90,7 +90,7 @@ class ModelGatitos {
   String referenceImageId;
   ImageCat image;
 
-  factory ModelGatitos.fromJson(Map<String, dynamic> json) => ModelGatitos(
+  factory CatsModel.fromJson(Map<String, dynamic> json) => CatsModel(
         weight: Weight.fromJson(json["weight"]),
         id: json["id"],
         name: json["name"],

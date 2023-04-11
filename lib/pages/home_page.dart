@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:gatitos_app/bloc/cats_bloc.dart';
 import 'package:gatitos_app/models/model_gatitos.dart';
 import 'package:gatitos_app/widgets/card_cats.dart';
 import 'package:gatitos_app/widgets/search_widget.dart';
 
 class HomePage extends StatelessWidget {
-  final List<ModelGatitos> cats;
-  const HomePage({Key? key, required this.cats}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,15 +17,12 @@ class HomePage extends StatelessWidget {
           foregroundColor: Colors.black,
           backgroundColor: Colors.transparent,
         ),
-        body: ContainHome(
-          cats: cats,
-        ));
+        body: const ContainHome());
   }
 }
 
 class ContainHome extends StatelessWidget {
-  final List<ModelGatitos> cats;
-  const ContainHome({Key? key, required this.cats}) : super(key: key);
+  const ContainHome({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,16 +32,39 @@ class ContainHome extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SearchWidget(cats: cats),
-          Expanded(child: _createList()),
+          SearchWidget(),
+          Expanded(child: CatsListWidget()),
         ],
       ),
     );
   }
+}
 
-  _createList() {
-    return ListView.builder(
-        itemCount: cats.length,
-        itemBuilder: (context, i) => CardsCatsWidget(cat: cats[i]));
+class CatsListWidget extends StatelessWidget {
+  CatsListWidget({super.key});
+  final CatBloc _catBloc = CatBloc();
+
+  @override
+  Widget build(BuildContext context) {
+    List<CatsModel> catsModels = [];
+    return StreamBuilder(
+      stream: _catBloc.catController.stream,
+      builder: (BuildContext context, AsyncSnapshot<List<CatsModel>> snapshot) {
+        if (_catBloc.cats.isEmpty) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
+          if (snapshot.hasData) {
+            catsModels = snapshot.data!;
+          } else {
+            catsModels = _catBloc.cats;
+          }
+          return ListView.builder(
+              itemCount: catsModels.length,
+              itemBuilder: (context, i) => CardsCatsWidget(cat: catsModels[i]));
+        }
+      },
+    );
   }
 }

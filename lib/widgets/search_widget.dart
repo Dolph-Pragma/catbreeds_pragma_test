@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../models/model_gatitos.dart';
-import '../pages/details_page.dart';
+import '../bloc/cats_bloc.dart';
 
 class SearchWidget extends StatelessWidget {
-  final List<ModelGatitos> cats;
-  const SearchWidget({Key? key, required this.cats}) : super(key: key);
+  SearchWidget({Key? key}) : super(key: key);
+  final CatBloc catBloc = CatBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -29,20 +28,10 @@ class SearchWidget extends StatelessWidget {
                       border: InputBorder.none,
                       hintStyle: TextStyle(color: Colors.grey.withOpacity(0.8)),
                       hintText: "Raza del gato"),
+                  onChanged: (value) => catBloc.filterCats(value),
                 ),
               ),
-              IconButton(
-                  onPressed: () {
-                    for (var cat in cats) {
-                      if (cat.name.toLowerCase() ==
-                          razaCtrl.text.toLowerCase()) {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => DetailsPage(cat: cat),
-                        ));
-                      }
-                    }
-                  },
-                  icon: const Icon(Icons.search))
+              const Icon(Icons.search),
             ],
           ),
         ),
