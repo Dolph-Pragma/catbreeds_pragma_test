@@ -16,6 +16,7 @@ class DetailsPage extends StatelessWidget {
         foregroundColor: Colors.black,
         backgroundColor: Colors.transparent,
         leading: IconButton(
+            key: const Key('detailsPageBackIcon'),
             onPressed: () => Navigator.pop(context),
             icon: const Icon(Icons.arrow_back_ios_new)),
       ),
@@ -30,6 +31,7 @@ class DetailsPage extends StatelessWidget {
                   width: double.infinity,
                   height: MediaQuery.of(context).size.height / 2,
                   child: Hero(
+                    key: Key('descriptionImg_${cat.id}'),
                     tag: cat.image.id,
                     child: Image(
                       image: NetworkImage(cat.image.url),

@@ -23,6 +23,7 @@ class SearchWidget extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,
                 child: TextField(
+                  key: const Key('searchWidgetTextField'),
                   controller: razaCtrl,
                   decoration: InputDecoration(
                       border: InputBorder.none,

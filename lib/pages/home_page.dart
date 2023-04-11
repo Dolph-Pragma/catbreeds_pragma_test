@@ -10,14 +10,22 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Catbreeds'),
-          centerTitle: true,
-          elevation: 0,
-          foregroundColor: Colors.black,
-          backgroundColor: Colors.transparent,
-        ),
-        body: const ContainHome());
+      appBar: AppBar(
+        title: const Text('Catbreeds'),
+        centerTitle: true,
+        elevation: 0,
+        foregroundColor: Colors.black,
+        backgroundColor: Colors.transparent,
+      ),
+      body: const ContainHome(),
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => SearchWidget(),
+          ),
+        );
+      }),
+    );
   }
 }
 
@@ -61,8 +69,10 @@ class CatsListWidget extends StatelessWidget {
             catsModels = _catBloc.cats;
           }
           return ListView.builder(
-              itemCount: catsModels.length,
-              itemBuilder: (context, i) => CardsCatsWidget(cat: catsModels[i]));
+            itemCount: catsModels.length,
+            itemBuilder: (context, i) => CardsCatsWidget(cat: catsModels[i]),
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          );
         }
       },
     );

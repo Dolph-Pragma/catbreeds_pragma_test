@@ -23,6 +23,7 @@ class DescriptionWidget extends StatelessWidget {
                   const Icon(Icons.map_rounded),
                   Text(
                     'Origin: ${cat.origin}',
+                    key: Key('origin_${cat.id}'),
                     style: styleT,
                   )
                 ],
@@ -32,6 +33,7 @@ class DescriptionWidget extends StatelessWidget {
                   const Icon(Icons.menu_book_rounded),
                   Text(
                     'Intelligence: ${cat.intelligence}',
+                    key: Key('intelligence_${cat.id}'),
                     style: styleT,
                   )
                 ],
@@ -41,6 +43,7 @@ class DescriptionWidget extends StatelessWidget {
                   const Icon(Icons.local_fire_department_outlined),
                   Text(
                     'Adaptability: ${cat.adaptability}',
+                    key: Key('adaptability_${cat.id}'),
                     style: styleT,
                   )
                 ],
@@ -50,6 +53,7 @@ class DescriptionWidget extends StatelessWidget {
                   const Icon(Icons.timer_sharp),
                   Text(
                     'Life Span: ${cat.lifeSpan}',
+                    key: Key('lifespan_${cat.id}'),
                     style: styleT,
                   )
                 ],
@@ -59,6 +63,7 @@ class DescriptionWidget extends StatelessWidget {
               ),
               Text(
                 'Temperament: ${cat.temperament}',
+                key: Key('temperament_${cat.id}'),
                 style: styleT,
               ),
               const SizedBox(height: 50)

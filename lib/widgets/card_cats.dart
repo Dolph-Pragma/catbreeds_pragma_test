@@ -9,9 +9,15 @@ class CardsCatsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => DetailsPage(cat: cat),
-      )),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => DetailsPage(cat: cat),
+          ),
+        );
+      },
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         elevation: 5,
@@ -27,6 +33,7 @@ class CardsCatsWidget extends StatelessWidget {
               cat.image.url.isEmpty
                   ? const Image(image: AssetImage('assets/logo.png'))
                   : Hero(
+                      key: Key(cat.id),
                       tag: cat.image.id,
                       child: FadeInImage(
                         height: 200,
