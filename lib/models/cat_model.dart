@@ -1,16 +1,8 @@
-// To parse this JSON data, do
-//
-//     final modelGatitos = modelGatitosFromJson(jsonString);
+import 'image_cat_model.dart';
+import 'weight_model.dart';
 
-import 'dart:convert';
-
-CatsModel modelGatitosFromJson(String str) =>
-    CatsModel.fromJson(json.decode(str));
-
-String modelGatitosToJson(CatsModel data) => json.encode(data.toJson());
-
-class CatsModel {
-  CatsModel({
+class CatModel {
+  const CatModel({
     required this.weight,
     required this.id,
     required this.name,
@@ -51,46 +43,46 @@ class CatsModel {
     required this.image,
   });
 
-  Weight weight;
-  String id;
-  String name;
-  String cfaUrl;
-  String vetstreetUrl;
-  String vcahospitalsUrl;
-  String temperament;
-  String origin;
-  String countryCodes;
-  String countryCode;
-  String description;
-  String lifeSpan;
-  int indoor;
-  int lap;
-  String altNames;
-  int adaptability;
-  int affectionLevel;
-  int childFriendly;
-  int dogFriendly;
-  int energyLevel;
-  int grooming;
-  int healthIssues;
-  int intelligence;
-  int sheddingLevel;
-  int socialNeeds;
-  int strangerFriendly;
-  int vocalisation;
-  int experimental;
-  int hairless;
-  int natural;
-  int rare;
-  int rex;
-  int suppressedTail;
-  int shortLegs;
-  String wikipediaUrl;
-  int hypoallergenic;
-  String referenceImageId;
-  ImageCat image;
+  final Weight weight;
+  final String id;
+  final String name;
+  final String cfaUrl;
+  final String vetstreetUrl;
+  final String vcahospitalsUrl;
+  final String temperament;
+  final String origin;
+  final String countryCodes;
+  final String countryCode;
+  final String description;
+  final String lifeSpan;
+  final int indoor;
+  final int lap;
+  final String altNames;
+  final int adaptability;
+  final int affectionLevel;
+  final int childFriendly;
+  final int dogFriendly;
+  final int energyLevel;
+  final int grooming;
+  final int healthIssues;
+  final int intelligence;
+  final int sheddingLevel;
+  final int socialNeeds;
+  final int strangerFriendly;
+  final int vocalisation;
+  final int experimental;
+  final int hairless;
+  final int natural;
+  final int rare;
+  final int rex;
+  final int suppressedTail;
+  final int shortLegs;
+  final String wikipediaUrl;
+  final int hypoallergenic;
+  final String referenceImageId;
+  final ImageCat image;
 
-  factory CatsModel.fromJson(Map<String, dynamic> json) => CatsModel(
+  factory CatModel.fromJson(Map<String, dynamic> json) => CatModel(
         weight: Weight.fromJson(json["weight"]),
         id: json["id"],
         name: json["name"],
@@ -170,53 +162,5 @@ class CatsModel {
         "hypoallergenic": hypoallergenic,
         "reference_image_id": referenceImageId,
         "image": image.toJson(),
-      };
-}
-
-class ImageCat {
-  ImageCat({
-    required this.id,
-    required this.width,
-    required this.height,
-    required this.url,
-  });
-
-  String id;
-  int width;
-  int height;
-  String url;
-
-  factory ImageCat.fromJson(Map<String, dynamic> json) => ImageCat(
-        id: json["id"] ?? "",
-        width: json["width"] ?? 0,
-        height: json["height"] ?? 0,
-        url: json["url"] ?? "",
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "width": width,
-        "height": height,
-        "url": url,
-      };
-}
-
-class Weight {
-  Weight({
-    required this.imperial,
-    required this.metric,
-  });
-
-  String imperial;
-  String metric;
-
-  factory Weight.fromJson(Map<String, dynamic> json) => Weight(
-        imperial: json["imperial"],
-        metric: json["metric"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "imperial": imperial,
-        "metric": metric,
       };
 }

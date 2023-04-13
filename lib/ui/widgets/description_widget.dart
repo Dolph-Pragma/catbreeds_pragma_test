@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:gatitos_app/models/model_gatitos.dart';
+
+import '../../bloc/cat_breed_bloc.dart';
+import '../../bloc/cat_favorite_bloc.dart';
+import '../../models/cat_model.dart';
+import '../pages/favorites_page.dart';
+import 'favorite_button_widget.dart';
 
 class DescriptionWidget extends StatelessWidget {
-  final CatsModel cat;
-  const DescriptionWidget({Key? key, required this.cat}) : super(key: key);
+  DescriptionWidget({Key? key, required this.cat}) : super(key: key);
+  final CatModel cat;
+
+  final CatBreedBloc catBloc = CatBreedBloc();
+
+  final CatFavoriteBloc catFavoriteBloc = CatFavoriteBloc();
 
   @override
   Widget build(BuildContext context) {
-    const styleT = TextStyle(fontSize: 18, fontWeight: FontWeight.w500);
+    const styleT = TextStyle(fontSize: 18, fontWeight: FontWeight.w300);
     return Expanded(
       child: SingleChildScrollView(
         child: Padding(
@@ -22,8 +31,7 @@ class DescriptionWidget extends StatelessWidget {
                 children: [
                   const Icon(Icons.map_rounded),
                   Text(
-                    'Origin: ${cat.origin}',
-                    key: Key('origin_${cat.id}'),
+                    '  Origin: ${cat.origin}',
                     style: styleT,
                   )
                 ],
@@ -32,8 +40,7 @@ class DescriptionWidget extends StatelessWidget {
                 children: [
                   const Icon(Icons.menu_book_rounded),
                   Text(
-                    'Intelligence: ${cat.intelligence}',
-                    key: Key('intelligence_${cat.id}'),
+                    '  Intelligence: ${cat.intelligence}',
                     style: styleT,
                   )
                 ],
@@ -42,8 +49,7 @@ class DescriptionWidget extends StatelessWidget {
                 children: [
                   const Icon(Icons.local_fire_department_outlined),
                   Text(
-                    'Adaptability: ${cat.adaptability}',
-                    key: Key('adaptability_${cat.id}'),
+                    '  Adaptability: ${cat.adaptability}',
                     style: styleT,
                   )
                 ],
@@ -52,8 +58,7 @@ class DescriptionWidget extends StatelessWidget {
                 children: [
                   const Icon(Icons.timer_sharp),
                   Text(
-                    'Life Span: ${cat.lifeSpan}',
-                    key: Key('lifespan_${cat.id}'),
+                    '  Life Span: ${cat.lifeSpan}',
                     style: styleT,
                   )
                 ],
@@ -63,10 +68,24 @@ class DescriptionWidget extends StatelessWidget {
               ),
               Text(
                 'Temperament: ${cat.temperament}',
-                key: Key('temperament_${cat.id}'),
                 style: styleT,
               ),
-              const SizedBox(height: 50)
+              FavoriteButtonWidget(
+                catImageId: cat.image.id,
+              ),
+              ElevatedButton.icon(
+                onPressed: () {
+                  catFavoriteBloc.getFavorites();
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => FavoritesPage(),
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.pets_rounded),
+                label: const Text('  Ver mis favoritos'),
+              ),
+              const SizedBox(height: 50),
             ],
           ),
         ),

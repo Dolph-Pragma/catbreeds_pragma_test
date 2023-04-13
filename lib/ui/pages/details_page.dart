@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:gatitos_app/models/model_gatitos.dart';
-import 'package:gatitos_app/widgets/description_widget.dart';
+
+import '../../models/cat_model.dart';
+import '../widgets/description_widget.dart';
 
 class DetailsPage extends StatelessWidget {
-  final CatsModel cat;
+  final CatModel cat;
   const DetailsPage({Key? key, required this.cat}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(cat.name),
         centerTitle: true,
@@ -33,10 +35,17 @@ class DetailsPage extends StatelessWidget {
                   child: Hero(
                     key: Key('descriptionImg_${cat.id}'),
                     tag: cat.image.id,
-                    child: Image(
-                      image: NetworkImage(cat.image.url),
-                      fit: BoxFit.cover,
-                    ),
+                    child: cat.image.url.isEmpty
+                        ? Image(
+                            image: const AssetImage(
+                              'assets/cat.png',
+                            ),
+                            height: MediaQuery.of(context).size.height * 0.23,
+                          )
+                        : Image(
+                            image: NetworkImage(cat.image.url),
+                            fit: BoxFit.cover,
+                          ),
                   )),
             ),
             DescriptionWidget(cat: cat)

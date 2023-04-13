@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:gatitos_app/models/model_gatitos.dart';
-import 'package:gatitos_app/pages/details_page.dart';
+
+import '../../models/cat_model.dart';
+import '../pages/details_page.dart';
+import 'show_cat_image.dart';
 
 class CardsCatsWidget extends StatelessWidget {
-  final CatsModel cat;
+  final CatModel cat;
   const CardsCatsWidget({Key? key, required this.cat}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        FocusScope.of(context).unfocus();
-
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => DetailsPage(cat: cat),
@@ -21,6 +21,7 @@ class CardsCatsWidget extends StatelessWidget {
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         elevation: 5,
+        clipBehavior: Clip.antiAlias,
         child: SizedBox(
           width: double.infinity,
           height: 320,
@@ -28,21 +29,9 @@ class CardsCatsWidget extends StatelessWidget {
             children: [
               ListTile(
                 title: Text(cat.name),
-                trailing: const Text("mas..."),
+                trailing: const Icon(Icons.arrow_forward_ios_rounded),
               ),
-              cat.image.url.isEmpty
-                  ? const Image(image: AssetImage('assets/logo.png'))
-                  : Hero(
-                      key: Key(cat.id),
-                      tag: cat.image.id,
-                      child: FadeInImage(
-                        height: 200,
-                        width: double.infinity,
-                        placeholder: const AssetImage('assets/logo.png'),
-                        image: NetworkImage(cat.image.url),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+              ShowCatImageWidget(catImageUrl: cat.image.url),
               ListTile(
                 title: Text(cat.origin),
                 trailing: Text("Inteligencia: ${cat.intelligence.toString()}"),

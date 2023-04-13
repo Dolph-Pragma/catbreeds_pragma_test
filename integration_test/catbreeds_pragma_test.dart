@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gatitos_app/pages/details_page.dart';
-import 'package:gatitos_app/pages/home_page.dart';
-import 'package:gatitos_app/pages/splash_page.dart';
-import 'package:gatitos_app/widgets/card_cats.dart';
+import 'package:gatitos_app/ui/pages/details_page.dart';
+import 'package:gatitos_app/ui/pages/home_page.dart';
+import 'package:gatitos_app/ui/pages/splash_page.dart';
+import 'package:gatitos_app/ui/widgets/card_cats.dart';
 import 'package:integration_test/integration_test.dart';
 
 main() {

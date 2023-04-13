@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:gatitos_app/bloc/cats_bloc.dart';
-import '/pages/home_page.dart';
+
+import '../../bloc/cat_breed_bloc.dart';
+import '../../bloc/cat_favorite_bloc.dart';
+import 'home_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -12,7 +14,8 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  final CatBloc _catBloc = CatBloc();
+  final CatBreedBloc _catBloc = CatBreedBloc();
+  final CatFavoriteBloc _catFavoriteBloc = CatFavoriteBloc();
 
   @override
   void initState() {
@@ -21,13 +24,16 @@ class _SplashPageState extends State<SplashPage> {
     Timer(
       const Duration(seconds: 3),
       () => Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => const HomePage(),
+        builder: (context) => HomePage(
+          catFavoriteBloc: _catFavoriteBloc,
+        ),
       )),
     );
   }
 
   Future<void> _getCats() async {
     await _catBloc.getCats();
+    await _catFavoriteBloc.getFavorites();
   }
 
   @override

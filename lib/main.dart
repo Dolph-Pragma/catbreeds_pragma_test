@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gatitos_app/pages/splash_page.dart';
+import 'package:gatitos_app/ui/pages/splash_page.dart';
 
 void main() => runApp(const MyApp());
 
