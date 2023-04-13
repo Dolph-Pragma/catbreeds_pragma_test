@@ -19,6 +19,7 @@ class CardsCatsWidget extends StatelessWidget {
         );
       },
       child: Card(
+        key: Key(cat.id),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         elevation: 5,
         clipBehavior: Clip.antiAlias,

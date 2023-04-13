@@ -21,29 +21,46 @@ class HomePage extends StatelessWidget {
         centerTitle: true,
       ),
       body: const ContainHome(),
-      floatingActionButton: CustomExpandableFab(
-        distance: 112.0,
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          CustomActionButtonWidget(
-            icon: const Icon(Icons.search_rounded),
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (BuildContext context) => SearchCatWidget());
-            },
-          ),
-          CustomActionButtonWidget(
+          FloatingActionButton(
+              key: const Key('GoToSearchFAB'),
+              child: const Icon(Icons.search_rounded),
               onPressed: () {
-                catFavoriteBloc.getFavorites();
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => FavoritesPage(),
-                  ),
-                );
-              },
-              icon: const Icon(Icons.favorite))
+                debugPrint('Youve pressed me! :) ');
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) => SearchCatWidget());
+              })
         ],
       ),
+      //  CustomExpandableFab(
+      //   key: const Key('CustomFabHomePage'),
+      //   distance: 100.0,
+      //   children: [
+      //     CustomActionButtonWidget(
+      //       key: const Key("SearchCatByBreedButton"),
+      //       icon: const Icon(Icons.search_rounded),
+      //       onPressed: () {
+      //         showDialog(
+      //             context: context,
+      //             builder: (BuildContext context) => SearchCatWidget());
+      //       },
+      //     ),
+      //     CustomActionButtonWidget(
+      //         key: const Key("GoToFavoritesButton"),
+      //         onPressed: () {
+      //           catFavoriteBloc.getFavorites();
+      //           Navigator.of(context).push(
+      //             MaterialPageRoute(
+      //               builder: (BuildContext context) => FavoritesPage(),
+      //             ),
+      //           );
+      //         },
+      //         icon: const Icon(Icons.favorite))
+      //   ],
+      // ),
     );
   }
 }
@@ -82,6 +99,7 @@ class CatsListWidget extends StatelessWidget {
             catsModels = _catBloc.cats;
           }
           return ListView.builder(
+            key: const Key('listviewCatBreeds'),
             itemCount: catsModels.length,
             padding: const EdgeInsets.symmetric(horizontal: 13.0),
             itemBuilder: (context, i) => CardsCatsWidget(cat: catsModels[i]),

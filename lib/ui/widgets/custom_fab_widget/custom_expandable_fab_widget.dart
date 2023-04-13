@@ -71,10 +71,12 @@ class _CustomExpandableFabState extends State<CustomExpandableFab>
         clipBehavior: Clip.none,
         children: [
           TapToCloseFabWidget(
+            // key: const Key('TapToCloseFAB'),
             toggleFunction: _toggle,
           ),
           ..._buildExpandingActionButtons(),
           TapToOpenFabWidget(
+            // key: const Key('TapToOpenFAB'),
             open: _open,
             toggle: _toggle,
           )
@@ -92,7 +94,7 @@ class _CustomExpandableFabState extends State<CustomExpandableFab>
         i < count;
         i++, angleInDregrees += step) {
       children.add(
-        _ExpandingActionButtonWidget(
+        ExpandingActionButtonWidget(
           directionInDegrees: angleInDregrees,
           maxDistance: widget.distance,
           progress: _expandAnimation,
@@ -205,9 +207,10 @@ class CustomActionButtonWidget extends StatelessWidget {
   }
 }
 
-class _ExpandingActionButtonWidget extends StatelessWidget {
-  const _ExpandingActionButtonWidget(
-      {required this.directionInDegrees,
+class ExpandingActionButtonWidget extends StatelessWidget {
+  const ExpandingActionButtonWidget(
+      {super.key,
+      required this.directionInDegrees,
       required this.maxDistance,
       required this.progress,
       required this.child});

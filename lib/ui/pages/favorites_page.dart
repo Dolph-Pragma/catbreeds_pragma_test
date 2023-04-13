@@ -35,6 +35,7 @@ class FavoritesPage extends StatelessWidget {
                     String formattedFavoriteDate =
                         DateFormat.yMMMEd().format(cat.createdAt);
                     return Card(
+                      key: Key('Card_Favorite${snapshot.data![index].imageId}'),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25.0),
                       ),
@@ -54,6 +55,8 @@ class FavoritesPage extends StatelessWidget {
                               contentPadding:
                                   const EdgeInsets.symmetric(horizontal: 16.0),
                               trailing: IconButton(
+                                  key: Key(
+                                      'IconButton_DeleteFavorite${snapshot.data![index].imageId}'),
                                   onPressed: () {
                                     catFavoriteBloc
                                         .deleteCatFromFavorites(cat.id);

@@ -15,45 +15,50 @@ class SearchCatWidget extends StatelessWidget {
     return Dialog(
       insetPadding: const EdgeInsets.only(
           left: 15.0, right: 15.0, top: 250.0, bottom: 350.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          const Text(
-            'Busca una raza de gato',
-            style: TextStyle(fontSize: 18),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: DropdownSearch<CatModel>(
-              items: catBloc.cats,
-              itemAsString: (item) => item.name,
-              onChanged: (value) {
-                if (value != null) {
-                  selectedCat = value;
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => DetailsPage(
-                        cat: selectedCat,
+      child: SingleChildScrollView(
+        physics: const NeverScrollableScrollPhysics(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const Text(
+              'Busca una raza de gato',
+              style: TextStyle(fontSize: 18, height: 5.0),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 25.0, vertical: 18.0),
+              child: DropdownSearch<CatModel>(
+                key: const Key('DropdownSearchForCatBreed'),
+                items: catBloc.cats,
+                itemAsString: (item) => item.name,
+                onChanged: (value) {
+                  if (value != null) {
+                    selectedCat = value;
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => DetailsPage(
+                          cat: selectedCat,
+                        ),
                       ),
-                    ),
-                  );
-                }
-              },
-              dropdownDecoratorProps: DropDownDecoratorProps(
-                dropdownSearchDecoration: InputDecoration(
-                    label: const Text('Razas'),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0))),
-              ),
-              popupProps: PopupProps.menu(
-                showSearchBox: true,
-                menuProps: MenuProps(
-                  borderRadius: BorderRadius.circular(20.0),
+                    );
+                  }
+                },
+                dropdownDecoratorProps: DropDownDecoratorProps(
+                  dropdownSearchDecoration: InputDecoration(
+                      label: const Text('Razas'),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0))),
+                ),
+                popupProps: PopupProps.menu(
+                  showSearchBox: true,
+                  menuProps: MenuProps(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
                 ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
