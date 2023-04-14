@@ -32,7 +32,10 @@ class CardsCatsWidget extends StatelessWidget {
                 title: Text(cat.name),
                 trailing: const Icon(Icons.arrow_forward_ios_rounded),
               ),
-              ShowCatImageWidget(catImageUrl: cat.image.url),
+              ShowCatImageWidget(
+                catImageUrl: cat.image.url,
+                catId: cat.id,
+              ),
               ListTile(
                 title: Text(cat.origin),
                 trailing: Text("Inteligencia: ${cat.intelligence.toString()}"),

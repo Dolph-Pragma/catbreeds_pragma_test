@@ -4,7 +4,7 @@ import 'package:gatitos_app/ui/pages/details_page.dart';
 import 'package:gatitos_app/ui/pages/favorites_page.dart';
 import 'package:gatitos_app/ui/pages/home_page.dart';
 import 'package:gatitos_app/ui/pages/splash_page.dart';
-import 'package:gatitos_app/ui/widgets/search_cat_widget.dart';
+
 // import 'package:gatitos_app/ui/widgets/card_cats.dart';
 // import 'package:gatitos_app/ui/widgets/custom_fab_widget/custom_expandable_fab_widget.dart';
 import 'package:integration_test/integration_test.dart';
@@ -32,27 +32,47 @@ main() {
     expect(find.byType(DetailsPage), findsOneWidget);
 
     //Regresamos a la pantlla principal con el arrowBack
-    await widgetTester.tap(find.byKey(const Key('detailsPageBackIcon')));
+    await widgetTester.tap(find.byKey(const Key('GoBackIconAppbar')));
     await widgetTester.pumpAndSettle();
 
     //Verificamos que estemos en el Homepage
     expect(find.byType(HomePage), findsOneWidget);
 
-    await widgetTester.tap(find.byKey(const Key('GoToSearchFAB')));
+    // //hacemos tap en el FAB de busqueda
+    // await widgetTester.tap(find.byKey(const Key('GoToSearchFAB')));
+    // await widgetTester.pumpAndSettle();
+
+    // expect(find.byType(SearchCatWidget), findsOneWidget);
+
+    // await widgetTester.tap(find.byKey(const Key('DropdownSearchForCatBreed')));
+    // await widgetTester.pumpAndSettle();
+
+    // // //hacemos tap en la raza deseada
+    // // await widgetTester.tap(find.byKey(const Key('DropDownItem_aege')));
+    // // await widgetTester.pumpAndSettle();
+    // await widgetTester.tap(find.descendant(
+    //     of: find.byKey(const Key('DropdownSearchForCatBreed')),
+    //     matching: find.byKey(GlobalKey(debugLabel: 'DropdownItem_aege'))));
+
+    // //lo añadimos a favoritos
+    // await widgetTester.tap(find.byKey(const Key('AddCatToFavoritesButton')));
+    // await widgetTester.pumpAndSettle();
+
+    // await widgetTester.tap(find.byKey(const Key('GoBackIconAppbar')));
+    // await widgetTester.pumpAndSettle();
+
+    // //verificamos estar realmente en homepage
+    // expect(find.byType(HomePage), findsOneWidget);
+
+    //hacemos tap en el FAB de favoritos para navegar a la pantalla
+    await widgetTester.tap(find.byKey(const Key('GoToFavoritesButton')));
     await widgetTester.pumpAndSettle();
 
-    expect(find.byType(SearchCatWidget), findsOneWidget);
+    //Verificamos
+    expect(find.byType(FavoritesPage), findsOneWidget);
 
-    await widgetTester.tap(find.byKey(const Key('GoToSearchFAB')));
-    await widgetTester.pumpAndSettle();
-
-    await widgetTester.tap(find.text('Abyssinian'));
-    await widgetTester.pumpAndSettle();
-
-    await widgetTester.tap(find.byKey(const Key('AddCatToFavoritesButton')));
-    await widgetTester.pumpAndSettle();
-
-    await widgetTester.tap(find.byKey(const Key('detailsPageBackIcon')));
+    //Volvemos a Homepage
+    await widgetTester.tap(find.byKey(const Key('GoBackIconAppbar')));
     await widgetTester.pumpAndSettle();
 
     //Hacemos un drag hasta encontrar el gatito con id csho en el ListView
@@ -88,7 +108,7 @@ main() {
 
     expect(find.byKey(const Key('Card_FavoriteoOOD3VXAQn')), findsNothing);
 
-    // expect(find.byType(CustomExpandableFab), findsWidgets);
+    /////////////////////// expect(find.byType(CustomExpandableFab), findsWidgets);
 
     // //Hacemos una busqueda especifica por raza del gatito que queremos encontrar
     // //Hacemos tap en el fab expandible

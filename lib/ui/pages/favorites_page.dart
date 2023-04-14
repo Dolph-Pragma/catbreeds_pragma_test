@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import '../../bloc/cat_favorite_bloc.dart';
 import '../../models/favorite_cat_model.dart';
 import '../widgets/show_cat_image.dart';
+import 'details_page.dart';
 
 class FavoritesPage extends StatelessWidget {
   FavoritesPage({super.key});
@@ -15,6 +16,7 @@ class FavoritesPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Favoritos'),
         centerTitle: true,
+        leading: const GoBackIconWidget(),
       ),
       body: StreamBuilder(
         stream: catFavoriteBloc.streamFavoriteCats,
@@ -46,6 +48,7 @@ class FavoritesPage extends StatelessWidget {
                           children: [
                             ShowCatImageWidget(
                               catImageUrl: cat.image.url,
+                              catId: cat.id.toString(),
                             ),
                             ListTile(
                               title: Text(

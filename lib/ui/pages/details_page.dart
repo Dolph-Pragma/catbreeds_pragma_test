@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import 'package:gatitos_app/ui/pages/home_page.dart';
 
 import '../../models/cat_model.dart';
 import '../widgets/description_widget.dart';
@@ -17,10 +18,7 @@ class DetailsPage extends StatelessWidget {
         elevation: 0,
         foregroundColor: Colors.black,
         backgroundColor: Colors.transparent,
-        leading: IconButton(
-            key: const Key('detailsPageBackIcon'),
-            onPressed: () => Navigator.pop(context),
-            icon: const Icon(Icons.arrow_back_ios_new)),
+        leading: const GoBackIconWidget(),
       ),
       body: SizedBox(
         width: double.infinity,
@@ -53,5 +51,20 @@ class DetailsPage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class GoBackIconWidget extends StatelessWidget {
+  const GoBackIconWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+        key: const Key('GoBackIconAppbar'),
+        onPressed: () =>
+            Navigator.of(context).popUntil((route) => route.isFirst),
+        icon: const Icon(Icons.arrow_back_ios_new));
   }
 }

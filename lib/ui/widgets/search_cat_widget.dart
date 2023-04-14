@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../bloc/cat_breed_bloc.dart';
 import '../../models/cat_model.dart';
 import '../pages/details_page.dart';
+import 'search_bar_cat_widget.dart';
 
 class SearchCatWidget extends StatelessWidget {
   SearchCatWidget({super.key});
@@ -13,8 +14,9 @@ class SearchCatWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     CatModel selectedCat;
     return Dialog(
-      insetPadding: const EdgeInsets.only(
-          left: 15.0, right: 15.0, top: 250.0, bottom: 350.0),
+      insetPadding: MediaQuery.of(context).viewInsets,
+      // const EdgeInsets.only(
+      //     left: 15.0, right: 15.0, top: 250.0, bottom: 350.0),
       child: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
         child: Column(
@@ -27,13 +29,21 @@ class SearchCatWidget extends StatelessWidget {
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 25.0, vertical: 18.0),
-              child: DropdownSearch<CatModel>(
+              child: DropdownSearch<DropdownMenuItem<CatModel>>(
                 key: const Key('DropdownSearchForCatBreed'),
-                items: catBloc.cats,
-                itemAsString: (item) => item.name,
-                onChanged: (value) {
-                  if (value != null) {
-                    selectedCat = value;
+                items: catBloc.cats
+                    .map(
+                      (e) => DropdownMenuItem<CatModel>(
+                        key: GlobalKey(debugLabel: 'DropdownItem_${e.id}'),
+                        value: e,
+                        child: Text(e.name),
+                      ),
+                    )
+                    .toList(),
+                itemAsString: (item) => item.value!.name,
+                onChanged: (selectedItem) {
+                  if (selectedItem != null) {
+                    selectedCat = selectedItem.value!;
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (BuildContext context) => DetailsPage(
@@ -50,6 +60,10 @@ class SearchCatWidget extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20.0))),
                 ),
                 popupProps: PopupProps.menu(
+                  listViewProps: const ListViewProps(
+                    keyboardDismissBehavior:
+                        ScrollViewKeyboardDismissBehavior.onDrag,
+                  ),
                   showSearchBox: true,
                   menuProps: MenuProps(
                     borderRadius: BorderRadius.circular(20.0),

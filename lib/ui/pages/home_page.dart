@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../bloc/cat_favorite_bloc.dart';
-import '../widgets/custom_fab_widget/custom_expandable_fab_widget.dart';
+// import '../widgets/custom_fab_widget/custom_expandable_fab_widget.dart';
 
 import '../../bloc/cat_breed_bloc.dart';
 import '../../models/cat_model.dart';
@@ -25,16 +25,43 @@ class HomePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
-              key: const Key('GoToSearchFAB'),
-              child: const Icon(Icons.search_rounded),
-              onPressed: () {
-                debugPrint('Youve pressed me! :) ');
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) => SearchCatWidget());
-              })
+            key: const Key('GoToSearchFAB'),
+            heroTag: 'GoToSearchFAB_heroTag',
+            backgroundColor: const Color(0xFFC881F7),
+            child: const Icon(
+              Icons.search_rounded,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) => SearchCatWidget(),
+              );
+            },
+          ),
+          // SizedBox(
+          //   height: MediaQuery.of(context).size.height * 0.02,
+          // ),
+          FloatingActionButton(
+            key: const Key('GoToFavoritesButton'),
+            heroTag: 'GoToFavoritesButton_heroTag',
+            backgroundColor: const Color(0xFFC881F7),
+            child: const Icon(
+              Icons.favorite,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              catFavoriteBloc.getFavorites();
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => FavoritesPage(),
+                ),
+              );
+            },
+          ),
         ],
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       //  CustomExpandableFab(
       //   key: const Key('CustomFabHomePage'),
       //   distance: 100.0,
@@ -51,12 +78,12 @@ class HomePage extends StatelessWidget {
       //     CustomActionButtonWidget(
       //         key: const Key("GoToFavoritesButton"),
       //         onPressed: () {
-      //           catFavoriteBloc.getFavorites();
-      //           Navigator.of(context).push(
-      //             MaterialPageRoute(
-      //               builder: (BuildContext context) => FavoritesPage(),
-      //             ),
-      //           );
+      // catFavoriteBloc.getFavorites();
+      // Navigator.of(context).push(
+      //   MaterialPageRoute(
+      //     builder: (BuildContext context) => FavoritesPage(),
+      //   ),
+      // );
       //         },
       //         icon: const Icon(Icons.favorite))
       //   ],
