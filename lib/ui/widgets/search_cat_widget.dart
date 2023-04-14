@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../../bloc/cat_breed_bloc.dart';
 import '../../models/cat_model.dart';
 import '../pages/details_page.dart';
-import 'search_bar_cat_widget.dart';
 
 class SearchCatWidget extends StatelessWidget {
   SearchCatWidget({super.key});
@@ -34,7 +33,7 @@ class SearchCatWidget extends StatelessWidget {
                 items: catBloc.cats
                     .map(
                       (e) => DropdownMenuItem<CatModel>(
-                        key: GlobalKey(debugLabel: 'DropdownItem_${e.id}'),
+                        key: Key('DropdownItem_${e.id}'),
                         value: e,
                         child: Text(e.name),
                       ),

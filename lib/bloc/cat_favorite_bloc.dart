@@ -36,7 +36,7 @@ class CatFavoriteBloc {
     await getFavorites();
   }
 
-  bool isCatInFavorites(String catImageId) {
+  bool isCatInFavorites(String? catImageId) {
     return favoriteCats.any((element) => element.imageId == catImageId);
   }
 

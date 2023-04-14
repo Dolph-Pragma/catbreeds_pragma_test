@@ -15,26 +15,26 @@ class _FavoriteButtonWidgetState extends State<FavoriteButtonWidget> {
   bool isCatFav = true;
 
   @override
+  void initState() {
+    super.initState();
+    isCatFav = catFavoriteBloc.isCatInFavorites(widget.catImageId);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return widget.catImageId.isNotEmpty
         ? ElevatedButton.icon(
             onPressed: () {
               isCatFav = catFavoriteBloc.updateFavoriteCat(widget.catImageId);
-              setState(() {
-                if (isCatFav) {
-                  isCatFav = false;
-                } else {
-                  isCatFav = true;
-                }
-              });
+              setState(() {});
             },
-            icon: isCatFav == true
+            icon: isCatFav == false
                 ? const Icon(
                     Icons.favorite_border_sharp,
                     color: Colors.red,
                   )
                 : const Icon(Icons.favorite_sharp, color: Colors.red),
-            label: isCatFav == true
+            label: isCatFav == false
                 ? const Text('  Añade a Favoritos')
                 : const Text('  Eliminar de Favoritos'),
           )

@@ -21,8 +21,7 @@ class DetailsPage extends StatelessWidget {
         leading: const GoBackIconWidget(),
       ),
       body: SizedBox(
-        width: double.infinity,
-        height: double.infinity,
+        height: MediaQuery.of(context).size.height,
         child: Column(
           children: [
             Padding(

@@ -35,13 +35,16 @@ class HomePage extends StatelessWidget {
             onPressed: () {
               showDialog(
                 context: context,
-                builder: (BuildContext context) => SearchCatWidget(),
+                builder: (BuildContext context) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: SearchCatWidget(),
+                ),
               );
             },
           ),
-          // SizedBox(
-          //   height: MediaQuery.of(context).size.height * 0.02,
-          // ),
+          const SizedBox(
+            height: 5,
+          ),
           FloatingActionButton(
             key: const Key('GoToFavoritesButton'),
             heroTag: 'GoToFavoritesButton_heroTag',
@@ -62,32 +65,6 @@ class HomePage extends StatelessWidget {
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      //  CustomExpandableFab(
-      //   key: const Key('CustomFabHomePage'),
-      //   distance: 100.0,
-      //   children: [
-      //     CustomActionButtonWidget(
-      //       key: const Key("SearchCatByBreedButton"),
-      //       icon: const Icon(Icons.search_rounded),
-      //       onPressed: () {
-      //         showDialog(
-      //             context: context,
-      //             builder: (BuildContext context) => SearchCatWidget());
-      //       },
-      //     ),
-      //     CustomActionButtonWidget(
-      //         key: const Key("GoToFavoritesButton"),
-      //         onPressed: () {
-      // catFavoriteBloc.getFavorites();
-      // Navigator.of(context).push(
-      //   MaterialPageRoute(
-      //     builder: (BuildContext context) => FavoritesPage(),
-      //   ),
-      // );
-      //         },
-      //         icon: const Icon(Icons.favorite))
-      //   ],
-      // ),
     );
   }
 }
